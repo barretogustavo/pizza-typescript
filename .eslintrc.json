@@ -1,0 +1,38 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["plugin:react/recommended", "airbnb", "prettier"],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
+  "rules": {
+    "@typescript-eslint/member-delimiter-style": ["off"],
+    "@typescript-eslint/no-implied-eval": ["off"],
+    "@typescript-eslint/explicit-function-return-type": ["off"],
+    "radix": ["off"],
+    "import/extensions": ["off"],
+    "import/no-extraneous-dependencies": ["off"],
+    "prettier/prettier": "error",
+    "import/prefer-default-export": ["off"],
+    "jsx-a11y/anchor-is-valid": ["off"],
+    "react/jsx-props-no-spreading": ["off"],
+    "react/jsx-curly-newline": ["off"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/no-array-index-key": "off",
+    "no-param-reassign": "off"
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "react": {
+      "version": "detect"
+    }
+  }
+}
