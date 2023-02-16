@@ -5,10 +5,10 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Hepta Slab', Helvetica, Arial;
   }
 
   body {
-    background-color: #f5f5f5;
+    background-color: #EEE;
   }
 `
