@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
+import PizzaContext from '../context'
 
 const QtdItemArea = styled.div`
   display: inline-flex;
@@ -36,12 +37,21 @@ const ButtonIncrement = styled.button`
   color: #333;
 `
 
-const Increment = () => {
+type Props = {
+  counter: number
+  setCounter: React.Dispatch<React.SetStateAction<number>>
+}
+
+const Increment = ({ counter, setCounter }: Props) => {
   return (
     <QtdItemArea>
-      <ButtonDecrement>-</ButtonDecrement>
-      <QtdItem>1</QtdItem>
-      <ButtonIncrement>+</ButtonIncrement>
+      <ButtonDecrement onClick={() => counter !== 0 && setCounter(counter - 1)}>
+        -
+      </ButtonDecrement>
+      <QtdItem>{counter}</QtdItem>
+      <ButtonIncrement onClick={() => setCounter(counter + 1)}>
+        +
+      </ButtonIncrement>
     </QtdItemArea>
   )
 }

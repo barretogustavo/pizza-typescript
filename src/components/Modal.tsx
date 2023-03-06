@@ -1,4 +1,4 @@
-import React, { SetStateAction, useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styled, { css } from 'styled-components'
 import PizzaContext from '../context'
 import Increment from './Increment'
@@ -105,6 +105,20 @@ const Modal = ({ onCancel }: Props) => {
   const { isModalOpen, pizzaState, setCart, cart, setIsModalOpen } =
     useContext(PizzaContext)
 
+  const [counter, setCounter] = useState(0)
+
+  const handleAddToCart = () => {
+    setCart([
+      ...cart,
+      {
+        ...pizzaState,
+        amount: counter,
+      },
+    ])
+    setCounter(0)
+    setIsModalOpen(false)
+  }
+
   return (
     <Background isOpen={isModalOpen}>
       <Container>
@@ -122,16 +136,11 @@ const Modal = ({ onCancel }: Props) => {
             <Label>PREÇO</Label>
             <PriceArea>
               <Price>{`R$ ${pizzaState.price || '---'}`}</Price>
-              <Increment />
+              <Increment counter={counter} setCounter={setCounter} />
             </PriceArea>
           </Area>
           <ButtonArea>
-            <ButtonAddToCart
-              onClick={() => {
-                setCart([...cart, pizzaState])
-                setIsModalOpen(false)
-              }}
-            >
+            <ButtonAddToCart onClick={() => handleAddToCart()}>
               Adicionar ao carrinho
             </ButtonAddToCart>
             <ButtonCancel onClick={onCancel}>Cancelar</ButtonCancel>
