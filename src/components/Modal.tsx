@@ -109,16 +109,11 @@ const Modal = ({ onCancel }: Props) => {
     <Background isOpen={isModalOpen}>
       <Container>
         <PizzaImgArea>
-          <img
-            src="https://github.com/barretogustavo/Ecommerce-Pizza/blob/main/images/pizza.png?raw=true"
-            alt="Imagem da pizza escolhida"
-          />
+          <img src={pizzaState.img} alt="Imagem da pizza escolhida" />
         </PizzaImgArea>
         <DetailsArea>
           <Title>{pizzaState.pizzaName || '---'}</Title>
-          <Description>
-            Descrição da pizza em mais de uma linha muito legal bem interessante
-          </Description>
+          <Description>{pizzaState.description || '---'}</Description>
           <Area>
             <Label>TAMANHO</Label>
             <PizzaSizes />
@@ -126,7 +121,7 @@ const Modal = ({ onCancel }: Props) => {
           <Area>
             <Label>PREÇO</Label>
             <PriceArea>
-              <Price>R$ 18.00</Price>
+              <Price>{`R$ ${pizzaState.price || '---'}`}</Price>
               <Increment />
             </PriceArea>
           </Area>

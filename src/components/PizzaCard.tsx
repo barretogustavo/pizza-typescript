@@ -68,13 +68,7 @@ const PizzaCard = ({ pizza }: Props) => {
   const { setIsModalOpen, setPizza } = useContext(PizzaContext)
 
   const handleOpenPizzaModal = () => {
-    setPizza({
-      pizzaName: 'Mussarela Teste',
-      description: 'teste descrição',
-      amount: 2,
-      price: 17.6,
-      sizes: ['320g', '530g', '860g'],
-    })
+    setPizza({ ...pizza })
     setIsModalOpen(true)
   }
 
