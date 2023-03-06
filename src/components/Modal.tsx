@@ -105,7 +105,7 @@ const Modal = ({ onCancel }: Props) => {
   const { isModalOpen, pizzaState, setCart, cart, setIsModalOpen } =
     useContext(PizzaContext)
 
-  const [counter, setCounter] = useState(0)
+  const [counter, setCounter] = useState(1)
 
   const handleAddToCart = () => {
     setCart([

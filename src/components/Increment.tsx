@@ -45,7 +45,7 @@ type Props = {
 const Increment = ({ counter, setCounter }: Props) => {
   return (
     <QtdItemArea>
-      <ButtonDecrement onClick={() => counter !== 0 && setCounter(counter - 1)}>
+      <ButtonDecrement onClick={() => counter !== 1 && setCounter(counter - 1)}>
         -
       </ButtonDecrement>
       <QtdItem>{counter}</QtdItem>

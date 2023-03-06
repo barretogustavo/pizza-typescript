@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
+import PizzaContext from '../context'
+import { PizzaItem } from '../types'
 import Increment from './Increment'
 
 const Row = styled.div`
@@ -27,20 +29,22 @@ const PizzaName = styled.p`
   }
 `
 
-const PizzaCartItem = () => {
+type Props = {
+  pizza: PizzaItem
+}
+
+const PizzaCartItem = ({ pizza }: Props) => {
+  const [counter, setCounter] = useState(pizza.amount || 1)
+
   return (
     <Row>
       <Gap>
-        <PizzaImage
-          src="https://github.com/barretogustavo/Ecommerce-Pizza/blob/main/images/pizza.png?raw=true"
-          width={40}
-          alt="Pizza"
-        />
+        <PizzaImage src={pizza.img} width={40} alt={pizza.pizzaName} />
         <PizzaName>
-          Mussarela <span>(G)</span>
+          {pizza.pizzaName} <span>(G)</span>
         </PizzaName>
       </Gap>
-      <Increment />
+      <Increment counter={counter} setCounter={setCounter} />
     </Row>
   )
 }

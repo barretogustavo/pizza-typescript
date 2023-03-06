@@ -76,9 +76,9 @@ const Cart = () => {
         <div />
         <ButtonCart onClick={() => setIsCartOpen(false)}>❌</ButtonCart>
       </Row>
-      <PizzaCartItem />
-      <PizzaCartItem />
-      <PizzaCartItem />
+      {cart.map((item) => (
+        <PizzaCartItem pizza={item} />
+      ))}
       <Row>
         <Detail>Subtotal</Detail>
         <Price>R$ 238.70</Price>
