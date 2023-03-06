@@ -1,13 +1,5 @@
 import React, { createContext, Dispatch, SetStateAction, useState } from 'react'
-
-type PizzaItem = {
-  pizzaName?: string
-  description?: string
-  price?: number
-  size?: string
-  amount?: number
-  image?: string
-}
+import { PizzaItem } from '../types'
 
 type PizzaContextProps = {
   pizzaState: PizzaItem

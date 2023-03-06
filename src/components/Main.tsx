@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import PizzaContext from '../context'
+import { pizzas } from '../helpers/pizzas'
 import Modal from './Modal'
 import PizzaCard from './PizzaCard'
 
@@ -24,13 +25,9 @@ const Main = () => {
   return (
     <Container>
       <Grid>
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
-        <PizzaCard />
+        {pizzas.map((item) => (
+          <PizzaCard pizza={item} />
+        ))}
       </Grid>
       <Modal onCancel={() => setIsModalOpen(false)} />
     </Container>

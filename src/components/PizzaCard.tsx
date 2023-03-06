@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import PizzaContext from '../context'
+import { PizzaItem } from '../types'
 
 const Container = styled.div`
   max-width: 250px;
@@ -59,7 +60,11 @@ const Description = styled.p`
   text-align: center;
 `
 
-const PizzaCard = () => {
+type Props = {
+  pizza: PizzaItem
+}
+
+const PizzaCard = ({ pizza }: Props) => {
   const { setIsModalOpen, setPizza } = useContext(PizzaContext)
 
   const handleOpenPizzaModal = () => {
@@ -68,7 +73,7 @@ const PizzaCard = () => {
       description: 'teste descrição',
       amount: 2,
       price: 17.6,
-      size: 'G',
+      sizes: ['320g', '530g', '860g'],
     })
     setIsModalOpen(true)
   }
@@ -77,18 +82,12 @@ const PizzaCard = () => {
     <Container>
       <PizzaArea>
         <ImgArea>
-          <img
-            src="https://github.com/barretogustavo/Ecommerce-Pizza/blob/main/images/pizza.png?raw=true"
-            width={200}
-            alt="Imagem ilustrativa da pizza"
-          />
+          <img src={pizza.img} width={200} alt="Imagem ilustrativa da pizza" />
         </ImgArea>
         <AddButton onClick={() => handleOpenPizzaModal()}>+</AddButton>
-        <Price>R$ 20.19</Price>
-        <Name>Mussarela</Name>
-        <Description>
-          Descrição da pizza em mais de uma linha muito legal bem interessante
-        </Description>
+        <Price>{`R$ ${pizza.price}`}</Price>
+        <Name>{pizza.pizzaName}</Name>
+        <Description>{pizza.description}</Description>
       </PizzaArea>
     </Container>
   )
