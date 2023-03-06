@@ -51,7 +51,8 @@
       }
     ],
     "no-undef": "warn",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "react/jsx-no-constructed-context-values": "warn"
   },
   "settings": {
     "import/resolver": {

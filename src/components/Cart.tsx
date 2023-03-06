@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled, { css } from 'styled-components'
+import PizzaContext from '../context'
 import PizzaCartItem from './PizzaCartItem'
 
 const Container = styled.div<{ isOpen: boolean }>`
@@ -48,14 +49,13 @@ const Price = styled.span`
 const Total = styled.h3``
 
 const Cart = () => {
-  const [isCartOpen, setIsCartOpen] = useState(true)
-  const cart = '1' // lógica básica do carrinho cheio. Iremos implementar um context futuramente
+  const { cart, setIsCartOpen, isCartOpen } = useContext(PizzaContext)
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  if (cart === '1' && !isCartOpen) {
+  if (cart.length && !isCartOpen) {
     return (
       <Header>
         <ButtonCart

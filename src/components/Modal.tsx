@@ -1,9 +1,10 @@
-import React, { SetStateAction } from 'react'
+import React, { SetStateAction, useContext } from 'react'
 import styled, { css } from 'styled-components'
+import PizzaContext from '../context'
 import Increment from './Increment'
 import PizzaSizes from './PizzaSizes'
 
-const Background = styled.div<{ isOpen: boolean }>`
+const Background = styled.div<{ isOpen?: boolean }>`
   ${({ isOpen }) => css`
     display: ${isOpen ? 'block' : 'none'};
     width: 100vw;
@@ -97,13 +98,15 @@ const ButtonCancel = styled.button`
 `
 
 type Props = {
-  isOpen: boolean
   onCancel(): void
 }
 
-const Modal = ({ isOpen, onCancel }: Props) => {
+const Modal = ({ onCancel }: Props) => {
+  const { isModalOpen, pizzaState, setCart, cart, setIsModalOpen } =
+    useContext(PizzaContext)
+
   return (
-    <Background isOpen={isOpen}>
+    <Background isOpen={isModalOpen}>
       <Container>
         <PizzaImgArea>
           <img
@@ -112,7 +115,7 @@ const Modal = ({ isOpen, onCancel }: Props) => {
           />
         </PizzaImgArea>
         <DetailsArea>
-          <Title>Calabresa</Title>
+          <Title>{pizzaState.pizzaName || '---'}</Title>
           <Description>
             Descrição da pizza em mais de uma linha muito legal bem interessante
           </Description>
@@ -128,7 +131,14 @@ const Modal = ({ isOpen, onCancel }: Props) => {
             </PriceArea>
           </Area>
           <ButtonArea>
-            <ButtonAddToCart>Adicionar ao carrinho</ButtonAddToCart>
+            <ButtonAddToCart
+              onClick={() => {
+                setCart([...cart, pizzaState])
+                setIsModalOpen(false)
+              }}
+            >
+              Adicionar ao carrinho
+            </ButtonAddToCart>
             <ButtonCancel onClick={onCancel}>Cancelar</ButtonCancel>
           </ButtonArea>
         </DetailsArea>

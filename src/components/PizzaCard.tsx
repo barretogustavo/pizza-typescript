@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
+import PizzaContext from '../context'
 
 const Container = styled.div`
   max-width: 250px;
@@ -58,24 +59,39 @@ const Description = styled.p`
   text-align: center;
 `
 
-const PizzaCard = () => (
-  <Container>
-    <PizzaArea>
-      <ImgArea>
-        <img
-          src="https://github.com/barretogustavo/Ecommerce-Pizza/blob/main/images/pizza.png?raw=true"
-          width={200}
-          alt="Imagem ilustrativa da pizza"
-        />
-      </ImgArea>
-      <AddButton>+</AddButton>
-      <Price>R$ 20.19</Price>
-      <Name>Mussarela</Name>
-      <Description>
-        Descrição da pizza em mais de uma linha muito legal bem interessante
-      </Description>
-    </PizzaArea>
-  </Container>
-)
+const PizzaCard = () => {
+  const { setIsModalOpen, setPizza } = useContext(PizzaContext)
+
+  const handleOpenPizzaModal = () => {
+    setPizza({
+      pizzaName: 'Mussarela Teste',
+      description: 'teste descrição',
+      amount: 2,
+      price: 17.6,
+      size: 'G',
+    })
+    setIsModalOpen(true)
+  }
+
+  return (
+    <Container>
+      <PizzaArea>
+        <ImgArea>
+          <img
+            src="https://github.com/barretogustavo/Ecommerce-Pizza/blob/main/images/pizza.png?raw=true"
+            width={200}
+            alt="Imagem ilustrativa da pizza"
+          />
+        </ImgArea>
+        <AddButton onClick={() => handleOpenPizzaModal()}>+</AddButton>
+        <Price>R$ 20.19</Price>
+        <Name>Mussarela</Name>
+        <Description>
+          Descrição da pizza em mais de uma linha muito legal bem interessante
+        </Description>
+      </PizzaArea>
+    </Container>
+  )
+}
 
 export default PizzaCard

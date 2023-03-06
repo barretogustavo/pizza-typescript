@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
+import PizzaContext from '../context'
 import Modal from './Modal'
 import PizzaCard from './PizzaCard'
 
@@ -18,7 +19,7 @@ const Grid = styled.div`
 `
 
 const Main = () => {
-  const [isModalOpen, setIsModalOPen] = useState(true)
+  const { setIsModalOpen } = useContext(PizzaContext)
 
   return (
     <Container>
@@ -31,7 +32,7 @@ const Main = () => {
         <PizzaCard />
         <PizzaCard />
       </Grid>
-      <Modal isOpen={isModalOpen} onCancel={() => setIsModalOPen(false)} />
+      <Modal onCancel={() => setIsModalOpen(false)} />
     </Container>
   )
 }
