@@ -1,5 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import Cart from './Cart'
+
+const Container = styled.div``
 
 const Title = styled.div`
   width: 100%;
@@ -13,10 +16,12 @@ const Title = styled.div`
 `
 
 const Header = () => (
-  <Title>
-    <h1>Pizzas</h1>
-    <hr />
-  </Title>
+  <Container>
+    <Title>
+      <h1>Pizzas</h1>
+    </Title>
+    <Cart />
+  </Container>
 )
 
 export default Header

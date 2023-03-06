@@ -49,7 +49,9 @@
         "namedComponents": "arrow-function",
         "unnamedComponents": "arrow-function"
       }
-    ]
+    ],
+    "no-undef": "warn",
+    "no-unused-vars": "warn"
   },
   "settings": {
     "import/resolver": {

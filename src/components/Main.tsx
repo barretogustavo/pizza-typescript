@@ -2,26 +2,32 @@ import React from 'react'
 import styled from 'styled-components'
 import PizzaCard from './PizzaCard'
 
-const Grid = styled.div`
+const Container = styled.div`
+  max-width: 1000px;
   margin: 0 auto;
+`
+
+const Grid = styled.div`
   display: grid;
   margin-top: 2rem;
-  padding: 1rem;
-  grid-template-columns: repeat(3, 1fr);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   grid-template-rows: repeat(3, 1fr);
-  grid-row-gap: 13px;
+  grid-column-gap: 16px;
 `
 
 const Main = () => (
-  <Grid>
-    <PizzaCard />
-    <PizzaCard />
-    <PizzaCard />
-    <PizzaCard />
-    <PizzaCard />
-    <PizzaCard />
-    <PizzaCard />
-  </Grid>
+  <Container>
+    <Grid>
+      <PizzaCard />
+      <PizzaCard />
+      <PizzaCard />
+      <PizzaCard />
+      <PizzaCard />
+      <PizzaCard />
+      <PizzaCard />
+    </Grid>
+  </Container>
 )
 
 export default Main
