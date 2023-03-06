@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import Modal from './Modal'
 import PizzaCard from './PizzaCard'
 
 const Container = styled.div`
@@ -16,18 +17,23 @@ const Grid = styled.div`
   grid-column-gap: 16px;
 `
 
-const Main = () => (
-  <Container>
-    <Grid>
-      <PizzaCard />
-      <PizzaCard />
-      <PizzaCard />
-      <PizzaCard />
-      <PizzaCard />
-      <PizzaCard />
-      <PizzaCard />
-    </Grid>
-  </Container>
-)
+const Main = () => {
+  const [isModalOpen, setIsModalOPen] = useState(true)
+
+  return (
+    <Container>
+      <Grid>
+        <PizzaCard />
+        <PizzaCard />
+        <PizzaCard />
+        <PizzaCard />
+        <PizzaCard />
+        <PizzaCard />
+        <PizzaCard />
+      </Grid>
+      <Modal isOpen={isModalOpen} onCancel={() => setIsModalOPen(false)} />
+    </Container>
+  )
+}
 
 export default Main
