@@ -48,7 +48,7 @@ const Row = styled.div`
 
 const Header = styled.div`
   padding-right: 1rem;
-  margin-top: -30px;
+  margin-top: -50px;
   position: fixed;
   right: 0;
 `

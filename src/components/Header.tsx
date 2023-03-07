@@ -12,11 +12,13 @@ const Title = styled.h1`
   margin-bottom: 1rem;
   position: relative;
   z-index: 10;
+  font-size: 1.8rem;
+  color: #171718;
 `
 
 const Header = () => (
   <Container>
-    <Title>Pizzas</Title>
+    <Title>🍕 PizzaMania</Title>
     <Cart />
   </Container>
 )
