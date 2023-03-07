@@ -26,7 +26,7 @@ const Main = () => {
     <Container>
       <Grid>
         {pizzas.map((item) => (
-          <PizzaCard pizza={item} />
+          <PizzaCard pizza={item} key={item.id} />
         ))}
       </Grid>
       <Modal onCancel={() => setIsModalOpen(false)} />

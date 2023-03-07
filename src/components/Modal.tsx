@@ -106,6 +106,7 @@ const Modal = ({ onCancel }: Props) => {
     useContext(PizzaContext)
 
   const [counter, setCounter] = useState(1)
+  const [size, setSize] = useState('GRANDE')
 
   const handleAddToCart = () => {
     setCart([
@@ -113,9 +114,10 @@ const Modal = ({ onCancel }: Props) => {
       {
         ...pizzaState,
         amount: counter,
+        size,
       },
     ])
-    setCounter(0)
+    setCounter(1)
     setIsModalOpen(false)
   }
 
@@ -130,13 +132,21 @@ const Modal = ({ onCancel }: Props) => {
           <Description>{pizzaState.description || '---'}</Description>
           <Area>
             <Label>TAMANHO</Label>
-            <PizzaSizes />
+            <PizzaSizes
+              size={size}
+              setSize={setSize}
+              sizes={pizzaState.sizes || ['']}
+            />
           </Area>
           <Area>
             <Label>PREÇO</Label>
             <PriceArea>
               <Price>{`R$ ${pizzaState.price || '---'}`}</Price>
-              <Increment counter={counter} setCounter={setCounter} />
+              <Increment
+                counter={counter}
+                setCounter={setCounter}
+                pizza={pizzaState}
+              />
             </PriceArea>
           </Area>
           <ButtonArea>

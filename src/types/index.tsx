@@ -6,4 +6,5 @@ export type PizzaItem = {
   sizes?: string[]
   description?: string
   amount?: number
+  size?: string
 }

@@ -31,33 +31,27 @@ const Size = styled.button<{ active: boolean }>`
     }
   `}
 `
+type Props = {
+  sizes: string[]
+  size: string
+  setSize: React.Dispatch<React.SetStateAction<string>>
+}
 
-const PizzaSizes = () => {
-  const [activeSize, setActiveSize] = useState('')
-
-  const handleClick = (size: string) => {
-    setActiveSize(size)
+const PizzaSizes = ({ sizes, size, setSize }: Props) => {
+  const handleClick = (activeSize: string) => {
+    setSize(activeSize)
   }
 
   return (
     <PizzaSizesArea>
-      <Size
-        active={activeSize === 'PEQUENA'}
-        onClick={() => handleClick('PEQUENA')}
-      >
-        PEQUENA <span>320g</span>
+      <Size active={size === 'PEQUENA'} onClick={() => handleClick('PEQUENA')}>
+        PEQUENA <span>{sizes[0]}</span>
       </Size>
-      <Size
-        active={activeSize === 'MÉDIA'}
-        onClick={() => handleClick('MÉDIA')}
-      >
-        MÉDIA <span>530g</span>
+      <Size active={size === 'MÉDIA'} onClick={() => handleClick('MÉDIA')}>
+        MÉDIA <span>{sizes[1]}</span>
       </Size>
-      <Size
-        active={activeSize === 'GRANDE'}
-        onClick={() => handleClick('GRANDE')}
-      >
-        GRANDE <span>860g</span>
+      <Size active={size === 'GRANDE'} onClick={() => handleClick('GRANDE')}>
+        GRANDE <span>{sizes[2]}</span>
       </Size>
     </PizzaSizesArea>
   )

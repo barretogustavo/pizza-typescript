@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import PizzaContext from '../context'
+import { PizzaItem } from '../types'
 
 const QtdItemArea = styled.div`
   display: inline-flex;
@@ -40,16 +41,33 @@ const ButtonIncrement = styled.button`
 type Props = {
   counter: number
   setCounter: React.Dispatch<React.SetStateAction<number>>
+  pizza: PizzaItem
 }
 
-const Increment = ({ counter, setCounter }: Props) => {
+const Increment = ({ counter, setCounter, pizza }: Props) => {
+  const { cart, setCart } = useContext(PizzaContext)
+
+  const handleSetCounter = (newCounter: number) => {
+    const updatedCart = cart.map((item) => {
+      if (item.id === pizza.id) {
+        return { ...item, amount: newCounter }
+      }
+      return item
+    })
+
+    setCart(updatedCart)
+    setCounter(newCounter)
+  }
+
   return (
     <QtdItemArea>
-      <ButtonDecrement onClick={() => counter !== 1 && setCounter(counter - 1)}>
+      <ButtonDecrement
+        onClick={() => counter !== 1 && handleSetCounter(counter - 1)}
+      >
         -
       </ButtonDecrement>
       <QtdItem>{counter}</QtdItem>
-      <ButtonIncrement onClick={() => setCounter(counter + 1)}>
+      <ButtonIncrement onClick={() => handleSetCounter(counter + 1)}>
         +
       </ButtonIncrement>
     </QtdItemArea>

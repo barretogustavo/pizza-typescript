@@ -13,6 +13,7 @@ type PizzaContextProps = {
 
   isCartOpen: boolean
   setIsCartOpen: Dispatch<React.SetStateAction<boolean>>
+  clearCartContext: () => void
 }
 
 const PizzaContext = createContext<PizzaContextProps>({
@@ -24,6 +25,7 @@ const PizzaContext = createContext<PizzaContextProps>({
   setCart: () => {},
   isCartOpen: false,
   setIsCartOpen: () => {},
+  clearCartContext: () => {},
 })
 
 type Props = {
@@ -36,6 +38,8 @@ const PizzaContextProvider = ({ children }: Props) => {
   const [cart, setCart] = useState<PizzaItem[]>([])
   const [isCartOpen, setIsCartOpen] = useState(false)
 
+  const clearCartContext = () => setCart([])
+
   return (
     <PizzaContext.Provider
       value={{
@@ -47,6 +51,7 @@ const PizzaContextProvider = ({ children }: Props) => {
         setCart,
         isCartOpen,
         setIsCartOpen,
+        clearCartContext,
       }}
     >
       {children}

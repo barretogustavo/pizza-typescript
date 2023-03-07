@@ -41,10 +41,10 @@ const PizzaCartItem = ({ pizza }: Props) => {
       <Gap>
         <PizzaImage src={pizza.img} width={40} alt={pizza.pizzaName} />
         <PizzaName>
-          {pizza.pizzaName} <span>(G)</span>
+          {pizza.pizzaName} <span>({pizza.size?.length && pizza.size[0]})</span>
         </PizzaName>
       </Gap>
-      <Increment counter={counter} setCounter={setCounter} />
+      <Increment counter={counter} setCounter={setCounter} pizza={pizza} />
     </Row>
   )
 }
