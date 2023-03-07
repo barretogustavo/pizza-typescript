@@ -4,22 +4,19 @@ import Cart from './Cart'
 
 const Container = styled.div``
 
-const Title = styled.div`
-  width: 100%;
+const Title = styled.h1`
+  width: 50%;
   height: 50px;
   text-align: left;
   padding: 1rem;
-
-  & > h1 {
-    margin-bottom: 1rem;
-  }
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 10;
 `
 
 const Header = () => (
   <Container>
-    <Title>
-      <h1>Pizzas</h1>
-    </Title>
+    <Title>Pizzas</Title>
     <Cart />
   </Container>
 )

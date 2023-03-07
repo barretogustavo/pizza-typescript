@@ -1,7 +1,18 @@
-import React, { useContext, useState } from 'react'
-import styled, { css } from 'styled-components'
+import React, { useContext, useEffect, useState } from 'react'
+import styled, { css, keyframes } from 'styled-components'
 import PizzaContext from '../context'
 import PizzaCartItem from './PizzaCartItem'
+
+const slideBottom = keyframes`
+  0% {
+    -webkit-transform: translateY(-400px);
+    transform: translateY(-400px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+`
 
 const Container = styled.div<{ isOpen: boolean }>`
   ${({ isOpen }) => css`
@@ -10,6 +21,9 @@ const Container = styled.div<{ isOpen: boolean }>`
     background-color: #9ccbe6;
     margin-top: -65px;
     padding: 1rem;
+    border-radius: 0 0 2rem 2rem;
+    -webkit-animation: ${slideBottom} 0.5s both;
+    animation: ${slideBottom} 0.5s both;
   `}
 `
 
@@ -18,6 +32,10 @@ const ButtonCart = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
+
+  & > span {
+    font-size: 1.2rem;
+  }
 `
 
 const Row = styled.div`
@@ -46,13 +64,49 @@ const Price = styled.span`
   color: #315970;
 `
 
+const Button = styled.button`
+  padding: 20px 30px;
+  border-radius: 20px;
+  background-color: #48d05f;
+  color: #fff;
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    background-color: #42b856;
+  }
+`
+
+const ButtonCancel = styled(Button)`
+  margin-right: 1rem;
+  background-color: #c72424;
+
+  &:hover {
+    background-color: #ac2525;
+  }
+`
+
 const Total = styled.h3``
 
 const Cart = () => {
-  const { cart, setIsCartOpen, isCartOpen } = useContext(PizzaContext)
+  const { cart, setIsCartOpen, isCartOpen, clearCartContext } =
+    useContext(PizzaContext)
+
+  const subtotal = cart.reduce(
+    (acc, item) => acc + (item.price || 0) * (item.amount || 1),
+    0,
+  )
+  const discount = subtotal * 0.1
+  const total = subtotal - discount
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handleClearCart = () => {
+    setIsCartOpen(false)
+    clearCartContext()
   }
 
   if (cart.length && !isCartOpen) {
@@ -65,6 +119,7 @@ const Cart = () => {
           }}
         >
           🛒
+          <span>{`(${cart.length})`}</span>
         </ButtonCart>
       </Header>
     )
@@ -77,19 +132,28 @@ const Cart = () => {
         <ButtonCart onClick={() => setIsCartOpen(false)}>❌</ButtonCart>
       </Row>
       {cart.map((item) => (
-        <PizzaCartItem pizza={item} />
+        <PizzaCartItem pizza={item} key={item.id} />
       ))}
       <Row>
         <Detail>Subtotal</Detail>
-        <Price>R$ 238.70</Price>
+        <Price>{`R$ ${subtotal.toFixed(2)}`}</Price>
       </Row>
       <Row>
         <Detail>Desconto (-10%)</Detail>
-        <Price>R$ 23.87</Price>
+        <Price>{`R$ ${discount.toFixed(2)}`}</Price>
       </Row>
       <Row>
         <Total>Total</Total>
-        <Total>R$ 214.83</Total>
+        <Total>{`R$ ${total.toFixed(2)}`}</Total>
+      </Row>
+      <Row>
+        <div />
+        <div>
+          <ButtonCancel onClick={() => handleClearCart()}>
+            Cancelar pedido
+          </ButtonCancel>
+          <Button>Finalizar pedido</Button>
+        </div>
       </Row>
     </Container>
   )
